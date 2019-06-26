@@ -19,6 +19,7 @@
         <method importPath="database/sql" receiver="*Rows" name="Close" />
         <method importPath="github.com/brharrelldev/SupermanDetector" receiver="*LoginDBClient" name="close" />
         <method importPath="github.com/brharrelldev/SupermanDetector/databases" receiver="*SuperManDetectorService" name="Close" />
+        <method importPath="github.com/brharrelldev/SupermanDetector/databases" receiver="*SupermanDatabases" name="Close" />
       </methods>
     </inspection_tool>
   </profile>
