@@ -2,7 +2,10 @@ package cmd
 
 import (
 	"errors"
+	"github.com/brharrelldev/SupermanDetector/databases"
+	"github.com/brharrelldev/SupermanDetector/service"
 	"github.com/urfave/cli"
+	"log"
 )
 
 var ServerCmd = cli.Command{
@@ -14,6 +17,12 @@ var ServerCmd = cli.Command{
 		},
 		cli.StringFlag{
 			Name: "mmdb",
+			EnvVar: "MMDB",
+		},
+		cli.StringFlag{
+			Name: "logindb",
+			EnvVar: "LOGIN_DB",
+
 		},
 	},
 	Before: func(app *cli.Context) error {
@@ -25,6 +34,21 @@ var ServerCmd = cli.Command{
 	},
 	Action: func(app *cli.Context) {
 
+		srv := service.Server{
+			Port: app.String("port"),
+			SupermanDBs: &databases.SupermanDatabases{
+				LoginDBClient: &databases.LoginDBClient{
+					DBFile: app.String("logindb"),
+				},
+				MMDB: databases.MMDB{
+					MMFile: app.String("mmdb"),
+				},
+			},
 
+		}
+
+		if err := srv.StartServer(); err != nil{
+			log.Fatalf("could not start server %v", err)
+		}
 	},
 }

@@ -11,6 +11,6 @@ type MMDB struct {
 	MMFile string
 }
 type SupermanDatabases struct {
-	LoginDBClient LoginDBClient
+	LoginDBClient *LoginDBClient
 	MMDB          MMDB
 }

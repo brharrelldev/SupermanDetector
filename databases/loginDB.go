@@ -21,6 +21,7 @@ func CheckIfExists(dbFile string) error {
 
 func NewDBClient(client *SupermanDatabases) (*SupermanDatabases, error) {
 
+
 	db, err := sql.Open("sqlite3", client.LoginDBClient.DBFile)
 	if err != nil {
 		return nil, fmt.Errorf("could not open new DB due to %v", err)

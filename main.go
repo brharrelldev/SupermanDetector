@@ -15,20 +15,17 @@ func main() {
 
 	app := cli.NewApp()
 	app.Name = "supes-cli"
+	app.Before = beforeHandler
+
 	app.Flags = []cli.Flag{
-		cli.StringFlag{ /**/
-			Name:   "db-file",
-			EnvVar: "LOGIN_DB",
+		cli.StringFlag{
+			Name: "db-file",
 		},
 		cli.StringFlag{
-			Name:   "data",
-			EnvVar: "INPUT_DATA",
-		},
-		cli.StringFlag{
-			Name: "login",
+			Name: "dataset",
+
 		},
 	}
-	app.Before = beforeHandler
 
 	app.Commands = []cli.Command{
 		cmd.ClientCmd,
@@ -51,7 +48,7 @@ func beforeHandler(app *cli.Context) error {
 
 	if err := databases.CheckIfExists(dbFile); err != nil {
 		l, err := databases.NewDBClient(&databases.SupermanDatabases{
-			LoginDBClient: databases.LoginDBClient{
+			LoginDBClient: &databases.LoginDBClient{
 				DBFile: app.GlobalString("db-file"),
 			},
 		})
@@ -65,7 +62,7 @@ func beforeHandler(app *cli.Context) error {
 		if err := l.CreateDB(); err != nil {
 			return fmt.Errorf("could not create new table %v", err)
 		}
-		data, err := os.Open(app.GlobalString("data"))
+		data, err := os.Open(app.GlobalString("dataset"))
 		if err != nil {
 			return fmt.Errorf("error reading file %v", err)
 		}
