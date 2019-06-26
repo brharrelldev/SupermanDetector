@@ -1,5 +1,5 @@
-#Superman Detector
-###Overview
+# Superman Detector
+### Overview
 Exercise to detect ip addresses based on login info.   This is working with a sample dataset that I built.  The program will check for a SQL database in the beginnning and create one if one doesn't current exists.
 
 This program consist of 2 parts.  Client and Server.
@@ -8,7 +8,7 @@ The Server is the "webservice" piece, and this does the processing, including ca
  
 The client is a wrapper to a HTTP Client.   This will bring will simply connect to the server, and specify logins which we want to check
 
-###Server
+### Server
 
 Server is a subcommand, below is an example of how to use it
 
@@ -22,7 +22,7 @@ Flags:
 --mmdb        GeoLite2 database with geolocation information about IP address
 ````
 
-###Client
+### Client
 
 ```
 --login       Username located in database, this is the name we want to look up
