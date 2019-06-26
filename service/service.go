@@ -8,7 +8,7 @@ import (
 )
 
 type Server struct {
-	port     string
+	Port    string
 	routes   *mux.Router
 	Request  *SuperRequest
 	Response *SuperResponse
@@ -60,10 +60,10 @@ func (srv *Server) loadRoutes() *mux.Router {
 	return r
 }
 
-func (srv *Server) StartServer(port string) error {
+func (srv *Server) StartServer() error {
 
 	srv.routes = srv.loadRoutes()
 
-	log.Printf("Listening on port %s", port)
-	return http.ListenAndServe(fmt.Sprintf("%v", port), srv.routes)
+	log.Printf("Listening on port %s", srv.Port)
+	return http.ListenAndServe(fmt.Sprintf("%v", srv.Port), srv.routes)
 }

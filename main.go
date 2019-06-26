@@ -29,7 +29,6 @@ func main() {
 		},
 	}
 	app.Before = beforeHandler
-	app.Action = actionHandler
 
 	app.Commands = []cli.Command{
 		cmd.ClientCmd,
@@ -42,12 +41,6 @@ func main() {
 
 }
 
-func actionHandler(app *cli.Context) {
-
-
-
-
-}
 
 func beforeHandler(app *cli.Context) error {
 

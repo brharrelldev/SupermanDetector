@@ -2,7 +2,9 @@ package cmd
 
 import (
 	"fmt"
+	"github.com/brharrelldev/SupermanDetector/service"
 	"github.com/urfave/cli"
+	"log"
 )
 
 var ClientCmd = cli.Command{
@@ -28,6 +30,14 @@ var ClientCmd = cli.Command{
 
 	},
 	Action: func(app *cli.Context) {
+
+		srv := service.Server{
+			Port: app.String("port"),
+		}
+
+		if err := srv.StartServer(); err != nil{
+			log.Fatalf("could not start server %v", err)
+		}
 
 
 	},
